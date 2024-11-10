@@ -1,10 +1,9 @@
 <script setup lang="ts">
-
 </script>
 
 <template>
   <div>
-    hello world
+    cloud disk
   </div>
 </template>
 

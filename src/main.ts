@@ -6,9 +6,21 @@ import App from './App.vue'
 import router from './router'
 import './assets/main.css'
 
-const app = createApp(App)
+window.isLogin = false
 
-app.use(createPinia())
-app.use(router)
+tools.ipcInvoke('existsSync', './loginData.json').then((res) => {
+  if (res) {
+    window.isLogin = res
+  }
 
-app.mount('#app')
+  const app = createApp(App)
+
+  app.use(createPinia())
+  app.use(router)
+
+  // const meta = document.createElement('meta')
+  // meta.name = 'naive-ui-style'
+  // document.head.appendChild(meta)
+
+  app.mount('#app')
+})
