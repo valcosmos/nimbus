@@ -46,7 +46,7 @@ function devTools(win: string) {
     else {
       current.webContents.openDevTools()
     }
-    console.log('devTools', win)
+    // console.log('devTools', win)
   }
 }
 
@@ -81,7 +81,7 @@ app.whenReady().then(() => {
   createMainWindow()
 })
 
-ipcMain.on('win', (_, win, type, ...args) => {
+ipcMain.on('win', (_, win, type, ..._args) => {
   switch (type) {
     case 'devTools':
       devTools(win)
@@ -99,7 +99,7 @@ ipcMain.handle('readFileSync', (_, filePath, encoding = 'utf-8') => {
 })
 
 ipcMain.handle('readSystemFile', (_, filePath, encoding) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     readFile(join(filePath), {
       encoding,
     }, (err, data) => {
@@ -133,7 +133,7 @@ ipcMain.handle('message', (_, title, message, type = 'info') => {
   })
 })
 
-ipcMain.handle('existsSync', (_, filePath, data, type = 'info') => {
+ipcMain.handle('existsSync', (_, filePath, data, _type = 'info') => {
   return existsSync(join(__dirname, filePath))
 })
 
